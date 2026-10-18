@@ -50,7 +50,7 @@ function ComingSoon({ title, description }) {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/kitara-fc">
       <Navbar />
 
       <Routes>
