@@ -1422,24 +1422,41 @@ p {
     display: flex;
   }
 
-  .main-nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    height: auto;
-    background: #fff;
-    box-shadow: 0 20px 25px #0002;
-    padding: 8px 22px 20px;
-    align-items: stretch;
-    gap: 0;
-    flex-direction: column;
-  }
+  
+.mobile-toggle {
+  position: relative;
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .main-nav.is-open {
-    display: flex;
-  }
+
+  
+.main-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: auto;
+  width: min(78vw, 320px);
+  height: 100dvh;
+  max-height: 100vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 10001;
+  background: #fff;
+  box-shadow: -15px 0 40px rgba(0, 0, 0, 0.2);
+  padding: 105px 22px 28px;
+  align-items: stretch;
+  gap: 0;
+  flex-direction: column;
+}
+
+.main-nav.is-open {
+  display: flex;
+}
+
 
   .nav-item {
     height: auto;
