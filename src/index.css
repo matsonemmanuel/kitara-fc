@@ -6291,3 +6291,266 @@ p {
   filter: grayscale(0);
   opacity: 1;
 }
+
+
+/* =========================================
+   KITARA FC — CINEMATIC PAGE TRANSITIONS
+========================================= */
+
+.cinematic-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  background: #080808;
+  color: #fff;
+  text-align: center;
+}
+
+.transition-background {
+  position: absolute;
+  inset: -2%;
+  z-index: -3;
+  background-position: center;
+  background-size: cover;
+  filter: saturate(0.85);
+  will-change: transform;
+}
+
+.transition-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.88),
+      rgba(0, 0, 0, 0.48),
+      rgba(0, 0, 0, 0.8)
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.75),
+      transparent 65%
+    );
+}
+
+.transition-red-glow {
+  position: absolute;
+  z-index: -1;
+  width: min(75vw, 720px);
+  height: min(75vw, 720px);
+  border-radius: 50%;
+  background: rgba(202, 24, 40, 0.2);
+  filter: blur(100px);
+  animation: kitaraGlow 3s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.transition-content {
+  position: relative;
+  width: min(90%, 720px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 16px;
+}
+
+.transition-crest {
+  width: clamp(74px, 12vw, 120px);
+  height: clamp(74px, 12vw, 120px);
+  object-fit: contain;
+  margin-bottom: 28px;
+  filter: drop-shadow(0 0 22px rgba(220, 30, 45, 0.5));
+}
+
+.transition-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #f3f3f3;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+}
+
+.transition-kicker span {
+  color: #ed2638;
+}
+
+.transition-content h2 {
+  margin: 17px 0 8px;
+  color: #fff;
+  font-size: clamp(2.5rem, 8vw, 6.5rem);
+  font-weight: 950;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+  text-shadow: 0 5px 35px rgba(0, 0, 0, 0.4);
+}
+
+.transition-content p {
+  margin: 12px 0 32px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(13px, 2vw, 17px);
+  letter-spacing: 0.04em;
+}
+
+.transition-progress {
+  width: min(260px, 70%);
+  height: 3px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.transition-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #e52336;
+  transform-origin: left center;
+  box-shadow: 0 0 14px rgba(229, 35, 54, 0.9);
+}
+
+.transition-tagline {
+  margin-top: 19px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+}
+
+.transition-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.transition-particles i {
+  position: absolute;
+  bottom: -20px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e52336;
+  opacity: 0;
+  box-shadow: 0 0 18px rgba(229, 35, 54, 0.8);
+  animation: kitaraParticle 3.5s linear infinite;
+}
+
+.transition-particles i:nth-child(1) {
+  left: 8%;
+  animation-delay: 0s;
+}
+
+.transition-particles i:nth-child(2) {
+  left: 19%;
+  width: 4px;
+  height: 4px;
+  animation-delay: 1.1s;
+}
+
+.transition-particles i:nth-child(3) {
+  left: 31%;
+  animation-delay: 2s;
+}
+
+.transition-particles i:nth-child(4) {
+  left: 45%;
+  width: 5px;
+  height: 5px;
+  animation-delay: 0.6s;
+}
+
+.transition-particles i:nth-child(5) {
+  left: 61%;
+  animation-delay: 1.7s;
+}
+
+.transition-particles i:nth-child(6) {
+  left: 73%;
+  width: 4px;
+  height: 4px;
+  animation-delay: 0.3s;
+}
+
+.transition-particles i:nth-child(7) {
+  left: 86%;
+  animation-delay: 2.4s;
+}
+
+.transition-particles i:nth-child(8) {
+  left: 94%;
+  width: 5px;
+  height: 5px;
+  animation-delay: 1.4s;
+}
+
+@keyframes kitaraGlow {
+  from {
+    transform: scale(0.8);
+    opacity: 0.45;
+  }
+
+  to {
+    transform: scale(1.2);
+    opacity: 0.9;
+  }
+}
+
+@keyframes kitaraParticle {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.8;
+  }
+
+  85% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateY(-105vh) scale(1.3);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .transition-content {
+    padding: 20px 12px;
+  }
+
+  .transition-crest {
+    margin-bottom: 22px;
+  }
+
+  .transition-kicker {
+    font-size: 8px;
+    letter-spacing: 0.15em;
+  }
+
+  .transition-content p {
+    margin-bottom: 27px;
+  }
+
+  .transition-tagline {
+    font-size: 8px;
+    letter-spacing: 0.2em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transition-red-glow,
+  .transition-particles i {
+    animation: none;
+  }
+}
