@@ -7582,3 +7582,23 @@ p {
   }
 }
 
+
+/* Keep the full Kitara FC header sticky on mobile */
+@media (max-width: 850px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+  }
+
+  .top-strip {
+    position: relative;
+    width: 100%;
+  }
+
+  .nav-wrap {
+    position: relative;
+    width: 100%;
+  }
+}
