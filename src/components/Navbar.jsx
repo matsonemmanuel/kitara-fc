@@ -1,6 +1,6 @@
 
-import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import {
   Menu,
   X,
@@ -57,15 +57,53 @@ const socialLinks = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(null)
+  const closeTimer = useRef(null)
+  const location = useLocation()
+
+  const cancelClose = () => {
+    if (closeTimer.current) {
+      window.clearTimeout(closeTimer.current)
+      closeTimer.current = null
+    }
+  }
 
   const closeMenus = () => {
+    cancelClose()
     setMenuOpen(false)
     setDropdownOpen(null)
   }
 
+  const scheduleDropdownClose = () => {
+    cancelClose()
+    closeTimer.current = window.setTimeout(() => {
+      setDropdownOpen(null)
+    }, 180)
+  }
+
   const toggleDropdown = (label) => {
+    cancelClose()
     setDropdownOpen((current) => (current === label ? null : label))
   }
+
+  useEffect(() => {
+    closeMenus()
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }, [location.pathname, location.search, location.hash])
+
+  useEffect(() => {
+    return () => cancelClose()
+  }, [])
+
+  useEffect(() => {
+    if (!menuOpen) return
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') closeMenus()
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [menuOpen])
 
   return (
     <header className="site-header" id="top">
@@ -144,7 +182,36 @@ export default function Navbar() {
             </div>
 
             {navigation.map((item) => (
-              <div className="nav-item" key={item.label}>
+              <div
+                className={`nav-item${dropdownOpen === item.label ? ' dropdown-active' : ''}`}
+                key={item.label}
+                onMouseEnter={() => {
+                  if (window.innerWidth > 850 && item.children) {
+                    cancelClose()
+                    setDropdownOpen(item.label)
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (window.innerWidth > 850 && item.children) {
+                    scheduleDropdownClose()
+                  }
+                }}
+                onFocus={() => {
+                  if (window.innerWidth > 850 && item.children) {
+                    cancelClose()
+                    setDropdownOpen(item.label)
+                  }
+                }}
+                onBlur={(event) => {
+                  if (
+                    window.innerWidth > 850 &&
+                    item.children &&
+                    !event.currentTarget.contains(event.relatedTarget)
+                  ) {
+                    scheduleDropdownClose()
+                  }
+                }}
+              >
                 <div className="nav-item-inner">
                   <NavLink
                     to={item.path}
@@ -152,23 +219,16 @@ export default function Navbar() {
                     className={({ isActive }) =>
                       isActive ? 'nav-link active' : 'nav-link'
                     }
-                    onClick={() => {
-                      if (!item.children) {
-                        closeMenus()
-                      } else if (window.innerWidth <= 850) {
+                    onClick={(event) => {
+                      if (item.children && window.innerWidth <= 850) {
+                        event.preventDefault()
                         toggleDropdown(item.label)
+                      } else {
+                        closeMenus()
                       }
                     }}
                   >
                     {item.label}
-                    {item.children && (
-                      <ChevronDown
-                        size={15}
-                        className={
-                          dropdownOpen === item.label ? 'chevron-open' : ''
-                        }
-                      />
-                    )}
                   </NavLink>
 
                   {item.children && (

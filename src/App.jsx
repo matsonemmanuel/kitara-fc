@@ -21,32 +21,45 @@ import Community from './assets/pages/Community.jsx'
 import GetInvolved from './assets/pages/GetInvolved.jsx'
 import logo from './assets/kitara-logo.jpg'
 
+import entranceImage from './assets/images/transitions/entrace.jpg'
+import tunnelImage from './assets/images/transitions/cele.jpg'
+import sprintImage from './assets/images/transitions/omedi.jpg'
+import celebrationImage from './assets/images/transitions/celebrate.jpg'
+import fansImage from './assets/images/transitions/fann.jpg'
+
+
 // Four scenes, played one at a time as visitors navigate.
 const transitionScenes = [
   {
     number: '01',
-    title: 'THE TUNNEL',
-    subtitle: 'A new chapter begins.',
-    image: '/kitara-fc/src/assets/images/home/real.jpg',
+    title: 'THE WALKING ENTRANCE',
+    subtitle: 'Our home. Our moment. Our pride.',
+    image: entranceImage,
   },
   {
     number: '02',
-    title: 'FULL SPEED',
-    subtitle: 'Driven by ambition.',
-    image: '/kitara-fc/src/assets/images/home/players.jpg',
+    title: 'THE TUNNEL',
+    subtitle: 'A new chapter begins.',
+    image: tunnelImage,
   },
   {
     number: '03',
-    title: 'THE MOMENT',
-    subtitle: 'Every goal means everything.',
-    image: '/kitara-fc/src/assets/images/home/over.jpg',
+    title: 'FULL SPEED',
+    subtitle: 'Driven by ambition.',
+    image: sprintImage,
   },
   {
     number: '04',
+    title: 'THE MOMENT',
+    subtitle: 'Every goal means everything.',
+    image: celebrationImage,
+  },
+  {
+    number: '05',
     title: 'OUR PRIDE',
     subtitle: "Together, we are Bunyoro's pride.",
-    image: '/kitara-fc/src/assets/images/news/fans.jpg',
-  },
+    image: fansImage,
+  }
 ]
 
 function ComingSoon({ title, description }) {
